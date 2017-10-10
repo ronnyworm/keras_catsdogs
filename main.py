@@ -38,22 +38,8 @@ np.random.seed(1)
 np.random.shuffle(both)
 np.random.seed(1)
 np.random.shuffle(both_y)
-imsave("out1.jpg", both[0])
-imsave("out2.jpg", both[1])
-imsave("out3.jpg", both[2])
-imsave("out4.jpg", both[3])
-imsave("out5.jpg", both[4])
-imsave("out6.jpg", both[5])
 
-both_y[0:6]
-# funktioniert!!!
-
-print(str(dogs.shape))
-print(str(cats.shape))
-
-sys.exit(0)
-
-
+print("done loading data")
 
 model = Sequential()
 model.add(Conv2D(32, (3,3), input_shape=(img_width, img_heigth, 3)))
@@ -77,8 +63,10 @@ model.add(Activation(K.sigmoid))
 
 model.compile(loss='binary_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 
-#model.fit_generator(training_data, steps_per_epoch=500, epochs=10, validation_data=validation_data)
+print("done compiling the model")
+
+model.fit(both, both_y, epochs=10, verbose=1)
 
 #model.save_weights ...
 
-print("Yeah")
+print("done with fitting")
