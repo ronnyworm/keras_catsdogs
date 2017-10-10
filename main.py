@@ -20,10 +20,10 @@ img_heigth = 32
 
 filelist = glob.glob('/Users/ronny/Downloads/__new/Stanford Dogs Dataset/example32/*')
 
-dogs = np.array([np.array(imread(filename)) for filename in filelist])
+dogs = np.array([np.array(imread(filename).flatten()) for filename in filelist])
 dogs_y = np.zeros((len(filelist),1))
 filelist = glob.glob('/Users/ronny/Downloads/__new/Cats Dataset/example32/*')
-cats = np.array([np.array(imread(filename)) for filename in filelist])
+cats = np.array([np.array(imread(filename).flatten()) for filename in filelist])
 cats_y = np.ones((len(filelist),1))
 
 both = np.concatenate((dogs, cats), axis=0)
