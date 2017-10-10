@@ -23,12 +23,13 @@ img_heigth = 320
 #		img = imresize(img, (img_width, img_heigth))
 #		imsave(filename, img)
 
-filelist = glob.glob('/Users/ronny/Downloads/__new/Stanford Dogs Dataset/example/*')
+filelist = glob.glob('/Users/ronny/Downloads/__new/Stanford Dogs Dataset/example320/*')
+
 dogs = np.array([np.array(imread(filename)) for filename in filelist])
-dogs_y = np.zeros((1000,1))
-filelist = glob.glob('/Users/ronny/Downloads/__new/Cats Dataset/example/*')
+dogs_y = np.zeros((len(filelist),1))
+filelist = glob.glob('/Users/ronny/Downloads/__new/Cats Dataset/example320/*')
 cats = np.array([np.array(imread(filename)) for filename in filelist])
-cats_y = np.ones((1000,1))
+cats_y = np.ones((len(filelist),1))
 
 both = np.concatenate((dogs, cats), axis=0)
 both_y = np.concatenate((dogs_y, cats_y), axis=0)
