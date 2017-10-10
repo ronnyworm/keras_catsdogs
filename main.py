@@ -13,15 +13,20 @@ import glob
 import sys
 import os.path
 
-img_width = 320
-img_heigth = 320
+img_width = 32
+img_heigth = 32
 
 
-#for filename in glob.glob("/Users/ronny/Downloads/__new/Stanford Dogs Dataset/example/*"):
-#	if os.path.isfile(filename):
-#		img = imread(filename)
-#		img = imresize(img, (img_width, img_heigth))
-#		imsave(filename, img)
+# change image size
+for filename in glob.glob("/Users/ronny/Downloads/__new/Cats Dataset/example32/*"):
+	if os.path.isfile(filename):
+		img = imread(filename)
+		img = imresize(img, (img_width, img_heigth))
+		imsave(filename, img)
+
+print("done")
+
+sys.exit()
 
 filelist = glob.glob('/Users/ronny/Downloads/__new/Stanford Dogs Dataset/example320/*')
 
@@ -33,7 +38,6 @@ cats_y = np.ones((len(filelist),1))
 
 both = np.concatenate((dogs, cats), axis=0)
 both_y = np.concatenate((dogs_y, cats_y), axis=0)
-
 
 np.random.seed(1)
 np.random.shuffle(both)
