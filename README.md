@@ -1,1 +1,2 @@
-Builds a CNN with Keras and Tensorflow to distinguish cats from dogs
+Should build a CNN with Keras and Tensorflow to distinguish cats from dogs
+
