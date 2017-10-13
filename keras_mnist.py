@@ -28,17 +28,22 @@ img_rows, img_cols = 32, 32
 img_channels = 3
 
 # load my custom data
-filelist = glob.glob('catsdogsdataset4900/dogsexample32_4900/*')
+folder = "catsdogsdataset4900"
+dogs_folder = "dogsexample32_4900"
+cats_folder = "catsexample32_4900"
+
+
+filelist = glob.glob(folder + '/' + dogs_folder + '/*')
 train_dogs = np.array([np.array(imread(filename).flatten()) for filename in filelist])
 train_dogs_y = np.zeros((len(filelist),1))
-filelist = glob.glob('catsdogsdataset4900/dogsexample32_4900_test/*')
+filelist = glob.glob(folder + '/' + dogs_folder + '_test/*')
 test_dogs = np.array([np.array(imread(filename).flatten()) for filename in filelist])
 test_dogs_y = np.zeros((len(filelist),1))
 
-filelist = glob.glob('catsdogsdataset4900/catsexample32_4900/*')
+filelist = glob.glob(folder + '/' + cats_folder + '/*')
 train_cats = np.array([np.array(imread(filename).flatten()) for filename in filelist])
 train_cats_y = np.ones((len(filelist),1))
-filelist = glob.glob('catsdogsdataset4900/catsexample32_4900_test/*')
+filelist = glob.glob(folder + '/' + cats_folder + '_test/*')
 test_cats = np.array([np.array(imread(filename).flatten()) for filename in filelist])
 test_cats_y = np.ones((len(filelist),1))
 
