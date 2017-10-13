@@ -21,7 +21,7 @@ import numpy as np
 
 batch_size = 128
 num_classes = 2
-epochs = 12
+epochs = 100
 
 # input image dimensions
 img_rows, img_cols = 32, 32
@@ -99,18 +99,18 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 # revise [convnets](https://www.youtube.com/watch?v=GYGYnspV230)
 # see <https://keras.io/layers/convolutional/#conv2d>
 
+# inspiration for this net from [here](http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html)
 model = Sequential()
-model.add(Conv2D(32, kernel_size=(3, 3),
+model.add(Conv2D(16, kernel_size=(5, 5),
                  activation='relu',
                  input_shape=input_shape))
-model.add(Conv2D(64, (3, 3), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Conv2D(128, (3, 3), activation='relu'))
+model.add(Conv2D(20, (5, 5), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.25))
+# 5x5 filter does not work here
+model.add(Conv2D(20, (3, 3), activation='relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Flatten())
-model.add(Dense(128, activation='relu'))
-model.add(Dropout(0.5))
 model.add(Dense(num_classes, activation='softmax'))
 
 model.compile(loss=keras.losses.categorical_crossentropy,
