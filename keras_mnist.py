@@ -19,26 +19,26 @@ from scipy.misc import imread, imsave, imresize
 import glob
 import numpy as np
 
-batch_size = 128
+batch_size = 300
 num_classes = 2
-epochs = 100
+epochs = 10
 
 # input image dimensions
 img_rows, img_cols = 32, 32
 img_channels = 3
 
 # load my custom data
-filelist = glob.glob('catsdogsdataset/dogsexample32/*')
+filelist = glob.glob('catsdogsdataset4900/dogsexample32_4900/*')
 train_dogs = np.array([np.array(imread(filename).flatten()) for filename in filelist])
 train_dogs_y = np.zeros((len(filelist),1))
-filelist = glob.glob('catsdogsdataset/dogsexample32test/*')
+filelist = glob.glob('catsdogsdataset4900/dogsexample32_4900_test/*')
 test_dogs = np.array([np.array(imread(filename).flatten()) for filename in filelist])
 test_dogs_y = np.zeros((len(filelist),1))
 
-filelist = glob.glob('catsdogsdataset/catsexample32/*')
+filelist = glob.glob('catsdogsdataset4900/catsexample32_4900/*')
 train_cats = np.array([np.array(imread(filename).flatten()) for filename in filelist])
 train_cats_y = np.ones((len(filelist),1))
-filelist = glob.glob('catsdogsdataset/catsexample32test/*')
+filelist = glob.glob('catsdogsdataset4900/catsexample32_4900_test/*')
 test_cats = np.array([np.array(imread(filename).flatten()) for filename in filelist])
 test_cats_y = np.ones((len(filelist),1))
 
