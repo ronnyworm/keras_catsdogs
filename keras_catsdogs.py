@@ -19,18 +19,18 @@ from scipy.misc import imread, imsave, imresize
 import glob
 import numpy as np
 
-batch_size = 200
+batch_size = 100
 num_classes = 2
 epochs = 10
 
 # input image dimensions
-img_rows, img_cols = 64, 64
+img_rows, img_cols = 32, 32
 img_channels = 3
 
 # load my custom data
-folder = "catsdogsdataset64"
-dogs_folder = "dogs64"
-cats_folder = "cats64"
+folder = "catsdogsdataset4900"
+dogs_folder = "dogsexample32_4900"
+cats_folder = "catsexample32_4900"
 
 
 filelist = glob.glob(folder + '/' + dogs_folder + '/*')
@@ -106,16 +106,17 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 
 # inspiration for this net from [here](http://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html)
 model = Sequential()
-model.add(Conv2D(32, kernel_size=(7, 7),
+model.add(Conv2D(16, kernel_size=(3, 3),
                  activation='relu',
                  input_shape=input_shape))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Conv2D(20, (5, 5), activation='relu'))
+model.add(Conv2D(32, (3, 3), activation='relu'))
+model.add(Conv2D(32, (3, 3), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 # 5x5 filter does not work here
-model.add(Conv2D(20, (5, 5), activation='relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Conv2D(20, (3, 3), activation='relu'))
+model.add(Conv2D(32, (3, 3), activation='relu'))
+# das klappt nicht
+#model.add(Conv2D(32, (3, 3), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Flatten())
 model.add(Dense(num_classes, activation='softmax'))
