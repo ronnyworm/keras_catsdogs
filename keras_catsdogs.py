@@ -11,10 +11,11 @@ from keras import backend as K
 from scipy.misc import imread, imsave, imresize
 import glob
 import numpy as np
+import matplotlib.pyplot as plt
 
-batch_size = 100
+batch_size = 50
 num_classes = 2
-epochs = 10
+epochs = 20
 
 # input image dimensions
 img_rows, img_cols = 32, 32
@@ -87,24 +88,26 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 # siehe <https://keras.io/layers/convolutional/#conv2d>
 
 model = Sequential()
-model.add(Conv2D(32, kernel_size=(3, 3),
+model.add(Conv2D(16, kernel_size=(3, 3),
                  activation='relu',
                  input_shape=input_shape))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Conv2D(64, (3, 3), activation='relu'))
-model.add(Conv2D(64, (3, 3), activation='relu'))
+model.add(Conv2D(32, (3, 3), activation='relu'))
+model.add(Conv2D(32, (3, 3), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Conv2D(32, (3, 3), activation='relu'))
 # hier kann kein Conv2D mehr eingebaut werden
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Flatten())
+# Fraction of the input units to drop
+#model.add(Dropout(0.5))
 model.add(Dense(num_classes, activation='softmax'))
 
 model.compile(loss=keras.losses.categorical_crossentropy,
               optimizer=keras.optimizers.Adadelta(),
               metrics=['accuracy'])
 
-model.fit(x_train, y_train,
+history = model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
           verbose=1,
@@ -112,3 +115,30 @@ model.fit(x_train, y_train,
 score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
+
+
+# list all data in history
+print(history.history.keys())
+
+# Set up a subplot grid that has height 2 and width 1,
+# and set the first such subplot as active.
+plt.subplot(2, 1, 1)
+# summarize history for accuracy
+plt.plot(history.history['acc'])
+plt.plot(history.history['val_acc'])
+plt.title('model accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc='upper left')
+
+
+# Set the second subplot as active, and make the second plot.
+plt.subplot(2, 1, 2)
+# summarize history for loss
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc='upper left')
+plt.show()
