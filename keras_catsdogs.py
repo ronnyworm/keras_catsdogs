@@ -21,9 +21,9 @@ img_rows, img_cols = 32, 32
 img_channels = 3
 
 # load my custom data
-folder = "catsdogsdataset4900"
-dogs_folder = "dogsexample32_4900"
-cats_folder = "catsexample32_4900"
+folder = "catsdogsdataset30k"
+dogs_folder = "dogs"
+cats_folder = "cats"
 
 
 filelist = glob.glob(folder + '/' + dogs_folder + '/*')
